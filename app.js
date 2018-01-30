@@ -1,6 +1,6 @@
 const express = require('express');
+const jquery = require('jquery');
 const Instagram = require('node-instagram').default;
-
 
 // Create a new instance.
 const instagram = new Instagram({
