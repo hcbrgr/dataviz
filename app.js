@@ -15,22 +15,13 @@ const instagram = new Instagram({
 const app = express();
 
 app.get('/', function(req, res){
-    res.sendfile('index.html', { root: __dirname + "/" } );
+    res.sendFile('index.html', { root: __dirname } );
 });
 
 // Handle auth code and get access_token for user
 app.get('/auth/instagram/callback', async (req, res) => {
-  try {
-    instagram.get('users/self', (err, data) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(data);
-        }
-    });
-  } catch (error) {
-    res.json(error);
-  }
+    const data = await instagram.get('users/self');
+    res.json(data);
 });
 
 // listen to port 3000
