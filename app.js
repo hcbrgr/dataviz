@@ -1,6 +1,6 @@
 const express = require('express');
-const jquery = require('jquery');
 const Instagram = require('node-instagram').default;
+
 
 // Create a new instance.
 const instagram = new Instagram({
@@ -19,9 +19,14 @@ app.get('/', function(req, res){
 });
 
 // Handle auth code and get access_token for user
+// app.get('/auth/instagram/callback', async (req, res) => {
+//     const data = await instagram.get('users/self');
+//     res.json(data);
+// });
 app.get('/auth/instagram/callback', async (req, res) => {
-    const data = await instagram.get('users/self');
-    res.json(data);
+    const data = await instagram.get('users/self/media/recent').then(data => {
+      res.json(data);
+    });
 });
 
 // listen to port 3000

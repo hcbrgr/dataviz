@@ -10,34 +10,39 @@
          <p id="dvtxt">
             Hello
          </p>
+         <div id="userTable">
+
+         </div>
       </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script>
-          $(document).ready(function(){
-              $.ajax({
-                  url: 'auth/instagram/callback',
-                  type: 'get',
-                  dataType: 'JSON',
-                  success: function(response){
-                      var len = response.length;
-                      for(var i=0; i<len; i++){
-                          var id = response[i].id;
-                          var username = response[i].username;
-                          var name = response[i].full_name;
-                          var email = response[i].email;
+         $(document).ready(function(){
 
-                          var tr_str = "<tr>" +
-                              "<td align='center'>" + (i+1) + "</td>" +
-                              "<td align='center'>" + username + "</td>" +
-                              "<td align='center'>" + name + "</td>" +
-                              "<td align='center'>" + email + "</td>" +
-                              "</tr>";
+             $.ajax({
+                 url: '/auth/instagram/callback',
+                 type: 'get',
+                 dataType: 'JSON',
+                 success: function(response){
+                    console.log(response);
+                    console.log(response.data);
+                    console.log(response.data.length);
 
-                          $("#userTable").append(tr_str);
-                      }
+                    var len = response.data.length;
+                    for(var i=0; i<len; i++){
+                        var id = response.data[i].id;
+                        var likes = response.data[i].likes.count;
+                        console.log( response.data[i].likes.count);
+                        var tr_str = "<tr>" +
+                             "<td align='center'>" + (i+1) + "</td>" +
+                             "<td align='center'>" + likes + "</td>" +
+                             "</tr>";
 
-                  }
-              });
-          });
+                        $("#userTable").append(tr_str);
+                    }
+
+                 }
+             });
+         });
       </script>
    </body>
 </html>
