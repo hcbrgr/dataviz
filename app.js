@@ -9,10 +9,14 @@ const instagram = new Instagram({
   accessToken: '522066540.1677ed0.1c34121592054c70b3c419646200de4f',
 });
 
-const redirectUri = 'http://localhost:3000/auth/instagram/callback';
+// const redirectUri = 'http://localhost:3000/auth/instagram/callback';
 
 // create express server
 const app = express();
+
+app.get('/', function(req, res){
+    res.sendfile('index.html', { root: __dirname + "/" } );
+});
 
 // Handle auth code and get access_token for user
 app.get('/auth/instagram/callback', async (req, res) => {
