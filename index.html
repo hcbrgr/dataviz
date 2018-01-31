@@ -31,11 +31,12 @@
                     for(var i=0; i<len; i++){
                         var id = response.data[i].id;
                         var likes = response.data[i].likes.count;
+                        var image = response.data[i].images.low_resolution.url;
                         console.log( response.data[i].likes.count);
-                        var tr_str = "<tr>" +
-                             "<td align='center'>" + (i+1) + "</td>" +
-                             "<td align='center'>" + likes + "</td>" +
-                             "</tr>";
+                        var tr_str = "<div>" +
+                             "<img src="+ image +" />"+
+                             "<p align='center'>" + likes + "</p>" +
+                             "</div>";
 
                         $("#userTable").append(tr_str);
                     }
